@@ -6,7 +6,10 @@ Install and configure supervisord to manage services.
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+None. This role is very basic.
+
+Include this role via galaxy and write custom roles to setup your services in
+the `/etc/supervisor/cond.d directory`.
 
 Role Variables
 --------------
@@ -16,7 +19,7 @@ See `defaults/main.yml`
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None
 
 Example Playbook
 ----------------
@@ -25,7 +28,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: supervisor }
 
 License
 -------
@@ -35,4 +38,12 @@ MIT
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+pdeaudney@gmail.com
+
+Pull requests happily merged.
+
+TODO
+----
+
+Add optional configuration logic to enable the http or socket server.
+Template the entire main configuration.
