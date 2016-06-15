@@ -4,3 +4,4 @@ supervisor_logdir: /var/log/supervisor
 supervisor_piddir: /var/run
 supervisor_logdir_mode: 0755
 supervisord_service_name: supervisord
+supervisor_config: /etc/supervisor/supervisord.conf

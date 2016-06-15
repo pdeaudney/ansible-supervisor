@@ -58,12 +58,6 @@
     tags:
       - supervisord
 
-  - stat:
-      path: /etc/supervisor/supervisord.conf
-    register: supervisord_config
-    tags:
-      - supervisord
-
   - name: Template supervisor
     template:
       src: templates/supervisor.conf.j2
