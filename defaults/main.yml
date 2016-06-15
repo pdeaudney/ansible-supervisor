@@ -1,5 +1,6 @@
 ---
 supervisor_version: 3.3.0
-supervisor_init_script: /etc/init.d/supervisord
 supervisor_logdir: /var/log/supervisor
-supervisor_logdir_mode: 0750
+supervisor_piddir: /var/run
+supervisor_logdir_mode: 0755
+supervisord_service_name: supervisord

@@ -1,10 +1,12 @@
 ---
-  - name: Setup init.d script
-    file:
+  - name: Setup init.d script for Ubuntu trusty
+    copy:
       src: files/etc/init.d/supervisord
-      dest: {{ supervisor_init_script }}
+      dest: /etc/init.d/"{{ supervisord_service_name }}"
       owner: root
       group: root
-      state: file
-    when: (ansible_distribution == "Ubuntu" and ansible_distribution_release == "trusty")
-    notify: register_service
+      mode: 0755
+    when: ansible_distribution == "Ubuntu" and ansible_distribution_release == "trusty"
+    notify: register_service_trusty
+    tags:
+      - supervisord

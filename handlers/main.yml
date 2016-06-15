@@ -1,5 +1,4 @@
 ---
-# handlers file for ansible-supervisor
-  - name: register_service
+  - name: register_initd_service_trusty
     command: update-rc.d supervisord defaults
     become: true

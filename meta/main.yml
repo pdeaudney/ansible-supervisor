@@ -1,6 +1,6 @@
 galaxy_info:
   author: Paul De Audney
-  description: Install and manage supervisord
+  description: Install supervisor via pip and ensure running as a service
   company:
   license: MIT
   min_ansible_version: 1.9

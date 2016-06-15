@@ -2,30 +2,75 @@
   - name: Run apt-get update & cache for 10min
     apt: update_cache=yes cache_valid_time=3600
     become: true
+    tags:
+      - supervisord
 
   - name: Install python-pip
     apt:
       name: python-pip
       state: present
     become: true
+    tags:
+      - supervisord
 
   - name: Install supervisord via pip
     pip:
       name: supervisor
-      version: {{ supervisor_version }}
-      state: install
+      version: "{{ supervisor_version }}"
+      state: present
     become: true
     register: supervisor_install
+    notify: register_initd_service
+    tags:
+      - supervisord
 
+  - stat:
+      path: "{{ supervisor_logdir }}"
+    register: logdir
+    tags:
+      - supervisord
 
   - name: Create supervisor log directory
     file:
-      path: {{ supervisor_logdir }}
+      path: "{{ supervisor_logdir }}"
       state: directory
-      mode: {{ supervisor_logdir_mode }}
+      mode: "{{ supervisor_logdir_mode }}"
     become: true
+    when: logdir.stat.isdir == False
+    tags:
+      - supervisord
 
-  - name: Create supervisor defaults file
+  - name: Create supervisor confdir
     file:
-      path: /etc/defaults/supervisor
-      state: touch
+      path: /etc/supervisor
+      state: directory
+      mode: 0755
+    become: true
+    tags:
+      - supervisord
+
+  - name: Create supervisor included confdir
+    file:
+      path: /etc/supervisor/conf.d
+      state: directory
+      mode: 0755
+    become: true
+    tags:
+      - supervisord
+
+  - stat:
+      path: /etc/supervisor/supervisord.conf
+    register: supervisord_config
+    tags:
+      - supervisord
+
+  - name: Template supervisor
+    template:
+      src: templates/supervisor.conf.j2
+      dest: "{{ supervisor_config }}"
+      mode: 0644
+      owner: root
+      group: root
+    become: true
+    tags:
+      - supervisord
