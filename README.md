@@ -3,6 +3,9 @@ Supervisord
 
 Install and configure supervisord to manage services.
 
+Targeting Ansible 2.0+ (currently requiring 1.9).
+Deployment architecture is focused on Ubuntu trusty.
+
 Requirements
 ------------
 
