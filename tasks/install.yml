@@ -1,0 +1,31 @@
+---
+  - name: Run apt-get update & cache for 10min
+    apt: update_cache=yes cache_valid_time=3600
+    become: true
+
+  - name: Install python-pip
+    apt:
+      name: python-pip
+      state: present
+    become: true
+
+  - name: Install supervisord via pip
+    pip:
+      name: supervisor
+      version: {{ supervisor_version }}
+      state: install
+    become: true
+    register: supervisor_install
+
+
+  - name: Create supervisor log directory
+    file:
+      path: {{ supervisor_logdir }}
+      state: directory
+      mode: {{ supervisor_logdir_mode }}
+    become: true
+
+  - name: Create supervisor defaults file
+    file:
+      path: /etc/defaults/supervisor
+      state: touch

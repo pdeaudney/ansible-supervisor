@@ -1,0 +1,10 @@
+---
+  - name: Setup init.d script
+    file:
+      src: files/etc/init.d/supervisord
+      dest: {{ supervisor_init_script }}
+      owner: root
+      group: root
+      state: file
+    when: (ansible_distribution == "Ubuntu" and ansible_distribution_release == "trusty")
+    notify: register_service

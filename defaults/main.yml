@@ -1,0 +1,5 @@
+---
+supervisor_version: 3.3.0
+supervisor_init_script: /etc/init.d/supervisord
+supervisor_logdir: /var/log/supervisor
+supervisor_logdir_mode: 0750

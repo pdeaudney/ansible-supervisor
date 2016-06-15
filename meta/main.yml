@@ -1,0 +1,15 @@
+galaxy_info:
+  author: Paul De Audney
+  description: Install and manage supervisord
+  company:
+  license: MIT
+  min_ansible_version: 1.9
+
+  platforms:
+  - name: Ubuntu
+    versions:
+    - trusty
+
+  galaxy_tags: []
+
+dependencies: []
