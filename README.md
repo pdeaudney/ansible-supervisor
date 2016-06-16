@@ -33,6 +33,16 @@ Including an example of how to use your role (for instance, with variables passe
       roles:
          - { role: supervisor }
 
+      vars:
+      supervisor_service:
+        service_name:
+          command: path/to/command
+          directory: directory/to/exec/from
+          stderrlogfile: path/to/error.log
+          stdoutlogfile: path/to/stdout.log
+          user: user-to-run-as
+          environment: ENV=var
+
 License
 -------
 

@@ -1,3 +1,22 @@
 ---
   - include: install.yml
   - include: init-config.yml
+
+  - name: Ensure supervisor service is running
+    service:
+      name: '{{ supervisord_service_name }}'
+      enabled: yes
+      state: started
+
+  - name: Template supervisor services
+    template:
+      src: templates/service.ini.j2
+      dest: /etc/supervisor/conf.d/{{ item.key }}.ini
+      owner: root
+      group: root
+      mode: 0644
+    with_dict: '{{ supervisor_service | default({}) }}'
+    become: true
+    when: supervisor_service is defined
+    tags:
+      - supervisor

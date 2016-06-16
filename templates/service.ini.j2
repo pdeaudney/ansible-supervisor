@@ -1,0 +1,10 @@
+[program:{{ item.key }}]
+command={{ item.value.command }}
+directory={{ item.value.directory }}
+autostart=true
+autorestart=true
+startretries=3
+stderr_logfile={{ item.value.stderrlogfile }}
+stdout_logfile={{ item.value.stdoutlogfile }}
+user={{ item.value.user }}
+environment={{ item.value.environment }}

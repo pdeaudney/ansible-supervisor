@@ -2,3 +2,5 @@
   - name: register_initd_service_trusty
     command: update-rc.d supervisord defaults
     become: true
+    tags:
+      - supervisor
