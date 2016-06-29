@@ -2,7 +2,7 @@
   - name: Setup init.d script for Ubuntu trusty
     copy:
       src: files/etc/init.d/supervisord
-      dest: /etc/init.d/"{{ supervisord_service_name }}"
+      dest: /etc/init.d/{{ supervisord_service_name }}
       owner: root
       group: root
       mode: 0755
@@ -10,3 +10,10 @@
     notify: register_service_trusty
     tags:
       - supervisord
+
+  - name: register_initd_service_trusty
+    command: update-rc.d supervisord defaults
+    become: true
+    when: supervisor_install.changed
+    tags:
+      - supervisor
