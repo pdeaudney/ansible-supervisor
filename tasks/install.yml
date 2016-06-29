@@ -36,7 +36,7 @@
       state: directory
       mode: "{{ supervisor_logdir_mode }}"
     become: true
-    when: logdir.stat.isdir == False
+    when: logdir.stat.exists == False
     tags:
       - supervisord
 
